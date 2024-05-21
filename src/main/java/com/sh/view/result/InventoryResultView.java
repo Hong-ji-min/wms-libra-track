@@ -1,4 +1,4 @@
-package com.sh.view;
+package com.sh.view.result;
 
 //import com.sh.inventory.model.dto.CategoryDto;
 import com.sh.model.dto.InventoryDto;

@@ -10,16 +10,14 @@ import lombok.Setter;
 
 import java.util.*;
 
+import static com.sh.WMSApplication.*;
+
 @Getter
 @Setter
 public class ExWarehousingView {
     private  static List<Integer> ids = new ArrayList<>();
 
-    private static Scanner scanner = new Scanner(System.in);
-
-    public static Integer PUB_MANAGER_ID = 0;
-    public static Integer PUB_ID = 0;
-    public static Integer INVEN_MANAGER_ID  = 1;
+    private static Scanner scanner = getScanner();
 
     private static OrderView orderView;
 
@@ -196,10 +194,6 @@ public class ExWarehousingView {
             }
 
         }
-    }
-
-    public static Scanner getScanner() {
-        return scanner;
     }
 
     // 출고 관리자 메뉴

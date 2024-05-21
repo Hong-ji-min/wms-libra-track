@@ -3,6 +3,7 @@ package com.sh.model.service;
 import com.sh.model.dao.AreaMapper;
 import com.sh.model.dto.AreaDto;
 import com.sh.model.dto.InventoryDto;
+import com.sh.model.dto.OrderAreaDetailDto;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.HashMap;
@@ -116,5 +117,6 @@ public class AreaService {
             sqlSession.close();
         }
     }
+
 
 }

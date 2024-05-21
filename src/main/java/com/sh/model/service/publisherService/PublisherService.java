@@ -13,7 +13,9 @@ public class PublisherService {
     public int getPublisherId(String publisherName) {
         SqlSession sqlSession = getSqlSession();
         PublisherDAO publisherDAO = sqlSession.getMapper(PublisherDAO.class);
-        return publisherDAO.getPublisherId(publisherName);
+        int publisherId = publisherDAO.getPublisherId(publisherName);
+        sqlSession.close();
+        return publisherId;
     }
 
     //출판사 등록
@@ -73,5 +75,20 @@ public class PublisherService {
             sqlSession.close();
         }
 
+    }
+
+
+    public Publisher findByName(String publisher) {
+
+        SqlSession sqlSession = getSqlSession();
+        PublisherDAO publisherDAO = sqlSession.getMapper(PublisherDAO.class);
+        try {
+            return publisherDAO.findByName(publisher);
+        } catch (Exception e) {
+            sqlSession.close();
+            throw new RuntimeException(e);
+        } finally {
+            sqlSession.close();
+        }
     }
 }

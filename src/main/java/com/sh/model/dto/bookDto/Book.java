@@ -1,10 +1,12 @@
 package com.sh.model.dto.bookDto;
 
+import com.sh.model.entity.BookArea;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,6 +23,8 @@ public class Book {
     private String author;
     private Integer pages;
     private String size;
+
+    private List<BookArea> bookAreaList;
 
 //    private Genre genre;
 

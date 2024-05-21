@@ -35,6 +35,8 @@
         <mapper resource="sql/inventory/inventory-mapper.xml"/>
         <mapper resource="sql/bookarea/bookarea-mapper.xml"/>
         <mapper resource="sql/orderarea/orderarea-mapper.xml"/>
+        <mapper resource="sql/publisher/publisher-mapper.xml"/>
+        <mapper resource="sql/book/book-mapper.xml"/>
 
     </mappers>
 </configuration>

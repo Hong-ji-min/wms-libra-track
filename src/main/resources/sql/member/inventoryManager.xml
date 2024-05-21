@@ -15,4 +15,12 @@
             #{memberId}
         )
     </insert>
+    <select id="findInventorymanager" resultType="com.sh.model.entity.InventoryManagerDto">
+        select
+            *
+        from
+            inventory_manager
+        where
+            member_id = #{memberId}
+    </select>
 </mapper>

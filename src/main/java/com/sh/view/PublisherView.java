@@ -1,13 +1,14 @@
-package com.sh.view.publisherView;
+package com.sh.view;
 
 import com.sh.controller.publisher.PublisherController;
 import com.sh.model.dto.publishserDto.Publisher;
 import com.sh.model.dto.publishserDto.PublisherManager;
-import com.sh.view.bookView.BookMenuView;
+import com.sh.view.BookMenuView;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+
+import static com.sh.WMSApplication.PUB_ID;
+import static com.sh.WMSApplication.getScanner;
 
 /**
  * 신규 출판사 등록
@@ -19,7 +20,7 @@ public class PublisherView
 {
     PublisherController publisherController = new PublisherController();
     BookMenuView bookMenuView = new BookMenuView();
-    Scanner scanner = new Scanner(System.in);
+    Scanner scanner = getScanner();
 
     PublisherManager publisherManager;
 
@@ -46,8 +47,7 @@ public class PublisherView
         return new Publisher(0, name, email, phoneNumber, businessNumber);
 
     }
-    public void startMenu(PublisherManager publisherManager){
-        this.publisherManager = publisherManager;
+    public void publisherMenuView( ){
         String menu = """
           1.출판 관리 (책 관리)
           2.출판사 관리
@@ -59,9 +59,9 @@ public class PublisherView
             System.out.println("메뉴를 선택해주세요 : ");
             int n = scanner.nextInt();
             switch (n) {
-                case 1 : bookMenuView.showMenu(publisherManager);
+                case 1 : bookMenuView.showMenu();
                     break;
-                case 2 : publisherMenu(publisherManager);
+                case 2 : publisherMenu();
                     break;
                 case 0 :
                     return;
@@ -71,7 +71,7 @@ public class PublisherView
             }
         }
     }
-    public void publisherMenu(PublisherManager publisherManager) {
+    public void publisherMenu() {
         String menu = """
                 ======================
                 1. 출판사 정보 수정 
@@ -81,21 +81,18 @@ public class PublisherView
                 ======================
                 """;
         while (true) {
-            int id = publisherManager.getPublisherId();
             System.out.println(menu);
             System.out.println("원하시는 메뉴를 선택해주세요!");
             System.out.print("메뉴 : ");
             int n = scanner.nextInt();
             switch(n) {
-//                case 1 : publisherController.insertPublisher(input());//출판사 등록
-//                    break;
-                case 1 : publisherController.updatePublisher(inputUpdate(id));//출판사 정보 수정
+                case 1 : publisherController.updatePublisher(inputUpdate(PUB_ID));//출판사 정보 수정
                     break;
                 case 2 :
-                    publisherController.deletePublisher(id);//출판사 삭제
+                    publisherController.deletePublisher(PUB_ID);//출판사 삭제
                     break;
                 case 3 :
-                    publisherController.findPublisherInformation(publisherManager.getPublisherId());//출판사 정보 조회
+                    publisherController.findPublisherInformation(PUB_ID);//출판사 정보 조회
                     break;
                 case 0 : return;
                 default :

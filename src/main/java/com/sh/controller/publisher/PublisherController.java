@@ -4,7 +4,7 @@ import com.sh.common.error.ErrorCode;
 import com.sh.common.error.ErrorView;
 import com.sh.model.dto.publishserDto.Publisher;
 import com.sh.model.service.publisherService.PublisherService;
-import com.sh.view.publisherView.DisplayPublisherView;
+import com.sh.view.DisplayPublisherView;
 
 public class PublisherController {
     PublisherService publisherService = new PublisherService();

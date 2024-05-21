@@ -1,6 +1,7 @@
 package com.sh.controller;
 
 
+import com.sh.exception.AreaException;
 import com.sh.model.dto.AreaDto;
 import com.sh.model.service.AreaService;
 import com.sh.exception.StockException;

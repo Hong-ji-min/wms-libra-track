@@ -1,4 +1,4 @@
-package com.sh.view;
+package com.sh.view.result;
 
 import com.sh.model.entity.MemberDto;
 import com.sh.model.entity.PublisherManagerDto;

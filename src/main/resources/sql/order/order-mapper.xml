@@ -83,6 +83,7 @@
             o.order_id = #{orderId}
     </select>
 
+
     <select id="findOrdersByExWarehousingId" resultType="com.sh.model.dto.OrderDto">
         select
         o.order_id, o.book_id, o.quantity, b.ISBN, b.title, b.author

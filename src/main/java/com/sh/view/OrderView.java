@@ -5,15 +5,15 @@ import com.sh.exception.AreaException;
 import com.sh.exception.StockException;
 import com.sh.model.dto.OrderAreaDetailDto;
 import com.sh.model.dto.OrderDto;
-import com.sh.model.entity.InWarehousing;
-import com.sh.model.entity.Status;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.sh.WarehousingApp.EX;
+import static com.sh.WMSApplication.EX;
+import static com.sh.WMSApplication.PUB_MANAGER_ID;
+import static com.sh.WMSApplication.getScanner;
 
 @AllArgsConstructor
 public class OrderView {
@@ -22,7 +22,7 @@ public class OrderView {
 
     public static List<Integer> ids = new ArrayList<>();
 
-    private static final Scanner scanner = InWarehousingView.getScanner();
+    private static final Scanner scanner = getScanner();
 
 
     public static void orderDetailPublisherMenu() {
@@ -35,11 +35,11 @@ public class OrderView {
                 """;
         while(true) {
             System.out.println(menu);
-            String choice = OrderView.scanner.nextLine();
+            String choice = OrderView.scanner.next();
             switch (choice) {
                 case "1":
                     System.out.printf("입고 주문 정보 INDEX를 입력해주세요. (입고 주문 정보 INDEX : %s)\n", "1 - " + ids.size());
-                    orderController.findOrderAreaDetailByOrderId(ids.get(Integer.parseInt(scanner.nextLine()) - 1));
+                    orderController.findOrderAreaDetailByOrderId(ids.get(Integer.parseInt(scanner.next()) - 1));
                     break;
                 case "0":
                     return;
@@ -59,11 +59,11 @@ public class OrderView {
                 """;
         while(true) {
             System.out.println(menu);
-            String choice = OrderView.scanner.nextLine();
+            String choice = OrderView.scanner.next();
             switch (choice) {
                 case "1":
                     System.out.printf("출고 주문 정보 INDEX를 입력해주세요. (출고 주문 정보 INDEX : %s)\n", "1 - " + ids.size());
-                    orderController.findOrderAreaDetailByOrderId(ids.get(Integer.parseInt(scanner.nextLine()) - 1));
+                    orderController.findOrderAreaDetailByOrderId(ids.get(Integer.parseInt(scanner.next()) - 1));
                     break;
                 case "0":
                     return;
@@ -86,24 +86,24 @@ public class OrderView {
         while(true) {
             try {
                 System.out.println(menu);
-                String choice = OrderView.scanner.nextLine();
+                String choice = OrderView.scanner.next();
                 switch (choice) {
                     case "1":
-                        System.out.printf("입고 주문 정보 INDEX를 입력해주세요. (입고 주문 정보 INDEX : %s)\n", ids);
-                        orderController.findOrderAreaDetailByOrderId(ids.get(Integer.parseInt(scanner.nextLine()) - 1));
+                        System.out.printf("입고 주문 정보 INDEX를 입력해주세요. (입고 주문 정보 INDEX : %s)\n",  "1 - " + ids.size());
+                        orderController.findOrderAreaDetailByOrderId(ids.get(Integer.parseInt(scanner.next()) - 1));
                         break;
                     case "2":
-                        System.out.printf("입고 주문 정보 INDEX를 입력해주세요. (입고 주문 정보 INDEX : %s)\n", ids);
-                        int idx = Integer.parseInt(scanner.nextLine()) - 1;
+                        System.out.printf("입고 주문 정보 INDEX를 입력해주세요. (입고 주문 정보 INDEX : %s)\n",  "1 - " + ids.size());
+                        int idx = Integer.parseInt(scanner.next()) - 1;
                         System.out.println("창고 위치를 입력해주세요.");
-                        String location = scanner.nextLine();
+                        String location = scanner.next();
                         System.out.println("입고 구역명을 입력해주세요.");
-                        String areaName = scanner.nextLine();
+                        String areaName = scanner.next();
                         orderController.reserveOrder(ids.get(idx), location, areaName, true);
                         break;
                     case "3":
-                        System.out.printf("입고 주문 정보 INDEX를 입력해주세요. (입고 정보 INDEX : %s)\n", ids);
-                        orderController.completeOrder(ids.get(Integer.parseInt(scanner.nextLine()) - 1), true);
+                        System.out.printf("입고 주문 정보 INDEX를 입력해주세요. (입고 정보 INDEX : %s)\n",  "1 - " + ids.size());
+                        orderController.completeOrder(ids.get(Integer.parseInt(scanner.next()) - 1), true);
                         break;
                     case "0":
                         return;
@@ -129,24 +129,24 @@ public class OrderView {
         while(true) {
             try {
                 System.out.println(menu);
-                String choice = OrderView.scanner.nextLine();
+                String choice = OrderView.scanner.next();
                 switch (choice) {
                     case "1":
                         System.out.printf("출고 주문 정보 INDEX를 입력해주세요. (출고 주문 정보 INDEX : %s)\n", "1 - " + ids.size());
-                        orderController.findOrderAreaDetailByOrderId(ids.get(Integer.parseInt(scanner.nextLine()) - 1));
+                        orderController.findOrderAreaDetailByOrderId(ids.get(Integer.parseInt(scanner.next()) - 1));
                         break;
                     case "2":
                         System.out.printf("출고 주문 정보 INDEX를 입력해주세요. (출고 주문 정보 INDEX : %s)\n", "1 - " + ids.size());
-                        int idx = Integer.parseInt(scanner.nextLine()) - 1;
+                        int idx = Integer.parseInt(scanner.next()) - 1;
                         System.out.println("창고 위치를 입력해주세요.");
-                        String location = scanner.nextLine();
+                        String location = scanner.next();
                         System.out.println("출고 구역명을 입력해주세요.");
-                        String areaName = scanner.nextLine();
+                        String areaName = scanner.next();
                         orderController.reserveOrder(ids.get(idx), location, areaName, false);
                         break;
                     case "3":
                         System.out.printf("출고 주문 정보 INDEX를 입력해주세요. (출고 정보 INDEX : %s)\n", "1 - " + ids.size());
-                        orderController.completeOrder(ids.get(Integer.parseInt(scanner.nextLine()) - 1), false);
+                        orderController.completeOrder(ids.get(Integer.parseInt(scanner.next()) - 1), false);
                         break;
                     case "0":
                         return;
@@ -183,17 +183,17 @@ public class OrderView {
                 idx += 1;
             }
             System.out.println("-----------------------------------------------");
-            if(InWarehousingView.PUB_MANAGER_ID != 0) { // 창고 관리자
-                if(EX) { // 출고
-                    exOrderDetailInventoryMenu();
-                } else { // 입고
-                    orderDetailInventoryMenu();
-                }
-            } else { // 출판사 관리자
+            if(PUB_MANAGER_ID != 0) { //  출판사
                 if (EX) {
                     exOrderDetailPublisherMenu();
                 } else {
                     orderDetailPublisherMenu();
+                }
+            } else { // 창고
+                if(EX) { // 출고
+                    exOrderDetailInventoryMenu();
+                } else { // 입고
+                    orderDetailInventoryMenu();
                 }
             }
 

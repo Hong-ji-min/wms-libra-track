@@ -12,4 +12,6 @@ public interface PublisherDAO {
     Publisher findPublisherInformation(int publisherId);
 
     int deletePublisher(int id);
+
+    Publisher findByName(String name);
 }

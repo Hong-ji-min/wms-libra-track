@@ -5,8 +5,8 @@ package com.sh.controller;
 //import com.sh.inventory.model.dto.CategoryDto;
 import com.sh.model.dto.InventoryDto;
 import com.sh.model.service.InventoryService;
-import com.sh.view.InventoryErrorView;
-import com.sh.view.InventoryResultView;
+import com.sh.view.error.InventoryErrorView;
+import com.sh.view.result.InventoryResultView;
 
 import java.util.List;
 

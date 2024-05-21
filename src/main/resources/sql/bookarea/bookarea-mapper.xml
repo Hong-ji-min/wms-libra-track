@@ -44,5 +44,17 @@
             oa.order_id = #{orderId}
 
     </select>
+    <select id="findAreaInventoryByBookAreaId" resultType="com.sh.model.dto.AreaInventoryDto">
+        select
+            area_name, location, a.capacity, a.quantity, a.reserved
+        from
+            book_area ba
+        join area a
+            on ba.area_id = a.area_id
+        join inventory i
+            on a.inventory_id = i.inventory_id
+        where
+            ba.book_area_id = #{bookAreaId}
+    </select>
 
 </mapper>

@@ -47,7 +47,8 @@ public class MemberService {
     //홍지민 작업 끝
 
     public int insertInventoryMember(MemberDto memberDto) {
-        try (SqlSession sqlSession = getSqlSession()) {
+        SqlSession sqlSession = getSqlSession();
+        try  {
             MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
             int result = memberMapper.insertMember(memberDto);
 
@@ -58,18 +59,19 @@ public class MemberService {
             return result;
         } catch (Exception e) {
             throw new RuntimeException("Failed to selectMember", e);
+        } finally {
+            sqlSession.close();
         }
     }
 
     public MemberDto loginCheck(String id, String password) {
-        try (SqlSession sqlSession = getSqlSession()) {
-            MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
-            MemberDto memberDto = memberMapper.loginCheck(id, password);
-            return memberDto;
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to login", e);
+        SqlSession sqlSession = getSqlSession();
 
-        }
+        MemberMapper memberMapper = sqlSession.getMapper(MemberMapper.class);
+        MemberDto memberDto = memberMapper.loginCheck(id, password);
+        sqlSession.close();
+        return memberDto;
+
     }
 
 }

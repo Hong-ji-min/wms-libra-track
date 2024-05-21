@@ -10,11 +10,15 @@
         (0, #{title}, #{ISBN}, #{publisherId}, #{pubDate},#{genreId}, #{price}, #{author}, #{pages}, #{size})
     </insert>
 
-    <select id="findBookByISBN" resultType = "Book">
+    <select id="findBookByISBN" resultMap="bookStockDto">
         select *
         from book
-        where ISBN = #{ISBN}
+        join book_area
+        on book.book_id = book_area.book_id
+        where
+            ISBN = #{ISBN}
     </select>
+
 
     <update id = "updateInforamtion">
         Update Book
@@ -37,7 +41,7 @@
         where ISBN = #{ISBN}
     </delete>
 
-    <select id="findAll" resultType="Book">
+    <select id="findAll" resultType="com.sh.model.dto.bookDto.Book">
         select b.* , p.name
         from Book b join publisher p
         on b.publisher_id = p.publisher_id
@@ -52,7 +56,23 @@
     </select>
 
 
-
-
+    <resultMap id="bookStockDto" type="com.sh.model.dto.bookDto.Book">
+        <id column="book_id" property="bookId"/>
+        <result column="title" property="title"/>
+        <result column="ISBN" property="ISBN"/>
+        <result column="publisher_id" property="publisherId"/>
+        <result column="pub_date" property="pubDate"/>
+        <result column="genre_id" property="genreId"/>
+        <result column="price" property="price"/>
+        <result column="author" property="author"/>
+        <result column="pages" property="pages"/>
+        <collection property="bookAreaList" ofType="com.sh.model.entity.BookArea">
+            <id column="book_area_id" property="bookAreaId"/>
+            <id column="book_id" property="bookId"/>
+            <result column="area_id" property="areaId"/>
+            <result column="quantity" property="quantity"/>
+            <result column="reserved" property="reserved"/>
+        </collection>
+    </resultMap>
 
 </mapper>

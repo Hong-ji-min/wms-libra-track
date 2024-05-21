@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-
+import static com.sh.WMSApplication.*;
 public class InWarehousingViewTest {
 
     @Test
@@ -15,8 +15,8 @@ public class InWarehousingViewTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        InWarehousingView.PUB_MANAGER_ID = 1;
-        InWarehousingView.PUB_ID = 1;
+        PUB_MANAGER_ID = 1;
+        PUB_ID = 1;
 
         InWarehousingView.inWarehousingPublisherMainMenu();
 
@@ -29,8 +29,8 @@ public class InWarehousingViewTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        InWarehousingView.PUB_MANAGER_ID = 1;
-        InWarehousingView.PUB_ID = 1;
+        PUB_MANAGER_ID = 1;
+        PUB_ID = 1;
 
         InWarehousingView.inWarehousingPublisherMainMenu();
 
@@ -43,7 +43,7 @@ public class InWarehousingViewTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
-        InWarehousingView.INVEN_MANAGER_ID = 1;
+        INVEN_MANAGER_ID = 1;
 
         InWarehousingView.inWarehousingInventoryManagerMainMenu();
 

@@ -9,7 +9,7 @@
         values
             (#{name}, #{userName}, #{password}, #{role}, #{phoneNumber}, #{email})
     </insert>
-    <select id="loginCheck" parameterType="String" resultType="com.sh.model.entity.MemberDto">
+    <select id="loginCheck" resultType="com.sh.model.entity.MemberDto">
         select
             *
         from

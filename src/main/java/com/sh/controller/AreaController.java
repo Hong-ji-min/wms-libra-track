@@ -5,8 +5,8 @@ package com.sh.controller;
 //import com.sh.inventory.model.dto.CategoryDto;
 import com.sh.model.dto.AreaDto;
 import com.sh.model.service.AreaService;
-import com.sh.view.AreaErrorView;
-import com.sh.view.AreaResultView;
+import com.sh.view.error.AreaErrorView;
+import com.sh.view.result.AreaResultView;
 import com.sh.model.dto.InventoryDto;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.sh.view.publisherView;
+package com.sh.view;
 
 import com.sh.model.dto.publishserDto.Publisher;
 

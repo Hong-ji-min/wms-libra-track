@@ -1,6 +1,6 @@
-package com.sh.view;
+package com.sh.view.error;
 
-public class InventoryErrorView {
+public class AreaErrorView {
     public static void displayError(String errorCode) {
         System.err.println(errorCode);
     }

@@ -1,9 +1,13 @@
 package com.sh.model.service;
 
+import com.sh.exception.RequestException;
 import com.sh.model.dao.InWarehousingDao;
+import com.sh.model.dto.bookDto.Book;
 import com.sh.model.entity.InWarehousing;
 import com.sh.model.entity.Order;
+import com.sh.model.entity.PublisherManagerDto;
 import com.sh.model.entity.Status;
+import com.sh.model.service.bookService.BookService;
 import org.apache.ibatis.session.SqlSession;
 
 import java.sql.Timestamp;
@@ -14,6 +18,9 @@ import java.util.List;
 import static com.sh.common.MyBatisTemplate.getSqlSession;
 public class InWarehousingService {
 
+    private final BookService bookService = new BookService();
+
+    private final PublisherManagerService publisherManagerService = new PublisherManagerService();
 
     public void insertInWarehousing(HashMap<String, Integer> orders, int publisherManagerId) {
 
@@ -24,14 +31,26 @@ public class InWarehousingService {
         inWarehousing.setStatus(Status.PENDING);
 
         inWarehousing.setPublisherManagerId(publisherManagerId);
-        
+
+        PublisherManagerDto publisherManager = publisherManagerService.findByPublisherManagerId(publisherManagerId);
+
+        int publishesrId = publisherManager.getPublisherId();
+
         // iterate over orders
         List<Order> orderList = new ArrayList<>();
         for (String ISBN : orders.keySet()) {
             int quantity = orders.get(ISBN);
             // db query to find bookId using ISBN
-            //int bookId = bookService.findBookIdByPublisherIdAndISBN(publisherId, ISBN);
-            int bookId = 1;
+            Book book = bookService.findBookByISBN(ISBN);
+
+            if (book == null) {
+                throw new RequestException("등록되지 않은 도서 입니다.");
+            }
+            if (book.getPublisherId() != publishesrId) {
+                throw new RequestException("해당 출판사의 도서가 아닙니다.");
+            }
+            int bookId = book.getBookId();
+
             Order order = new Order();
             order.setQuantity(quantity);
             order.setBookId(bookId);

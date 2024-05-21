@@ -3,15 +3,19 @@ package com.sh.view;
 import com.sh.controller.PublisherManagerController;
 import com.sh.model.entity.MemberDto;
 import com.sh.model.entity.PublisherManagerDto;
-import com.sh.model.entity.Role;
-import com.sh.model.service.PublisherManagerService;
 
 import java.util.Scanner;
 
+import static com.sh.WMSApplication.getScanner;
+import static com.sh.WMSApplication.*;
 //홍지민 작업 시작
 public class PublisherManagerView {
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = getScanner();
     PublisherManagerController publisherManagerController = new PublisherManagerController();
+
+    BookMenuView bookMenuView = new BookMenuView();
+
+    PublisherView publisherView = new PublisherView();
 
     public void choicePublisherMenu(MemberDto memberDto) {
         String choicePublisherMenu = """
@@ -21,21 +25,60 @@ public class PublisherManagerView {
                 2. 도서 관리
                 3. 입고 관리
                 4. 출고 관리
-                5. 나가기
+                5. 출판(사) 관리
+                0. 나가기
                 =============================
                 입력 : 
                 """;
+        PublisherManagerDto publisherManagerDto = publisherManagerController.findPublisherManagerInfo(memberDto);
+
+        if (publisherManagerDto != null) {
+            PUB_MANAGER_ID = publisherManagerDto.getPublisherManagerId();
+            PUB_ID = publisherManagerDto.getPublisherId();
+        }
+
         while (true) {
+
+            if(publisherManagerDto == null) {
+                publisherManagerDto = publisherManagerController.findPublisherManagerInfo(memberDto);
+
+                if (publisherManagerDto != null) {
+                    PUB_MANAGER_ID = publisherManagerDto.getPublisherManagerId();
+                    PUB_ID = publisherManagerDto.getPublisherId();
+                }
+            }
             System.out.print(choicePublisherMenu);
             int choice = sc.nextInt();
+
             switch (choice) {
                 case 1:
                     publisherManagement(memberDto);
                     break;
-//            case 2 : BookView.(); break;
-            case 3 : InWarehousingView.inWarehousingPublisherMenu(); break;
-            case 4 : ExWarehousingView.exWarehousingPublisherMenu(); break;
-                case 5 :
+                case 2 :
+                    if (publisherManagerDto == null) {
+                        System.out.println("출판사 정보가 없습니다. 출판사 정보를 먼저 등록해주세요.");
+                        break;
+                    }
+                    bookMenuView.showMenu();
+                    break;
+                case 3 :
+                    if (publisherManagerDto == null) {
+                        System.out.println("출판사 정보가 없습니다. 출판사 정보를 먼저 등록해주세요.");
+                        break;
+                    }
+                    EX = false;
+                    InWarehousingView.inWarehousingPublisherMainMenu(); break;
+                case 4 :
+                    if (publisherManagerDto == null) {
+                        System.out.println("출판사 정보가 없습니다. 출판사 정보를 먼저 등록해주세요.");
+                        break;
+                    }
+                    EX = true;
+                    ExWarehousingView.exWarehousingPublisherMainMenu(); break;
+                case 5:
+                    publisherView.publisherMenuView();
+                    break;
+                case 0 :
                     return;
                 default:
                     System.out.print("잘못된 입력입니다. 다시 입력해주세요 : ");
@@ -50,7 +93,8 @@ public class PublisherManagerView {
                 ===================
                  1. 회원 정보 조회
                  2. 회원 정보 수정
-                 3. 나가기
+                 3. 출판사 등록
+                 0. 나가기
                 ===================
                 """);
         while (true) {
@@ -65,6 +109,13 @@ public class PublisherManagerView {
                     publisherManagerController.updatePublisherManager(updatePublisherManager(memberDto));
                     break;
                 case 3:
+                    System.out.println("출판사 등록을 시작합니다.");
+                    System.out.println("출판사를 입력해주세요.");
+                    String publisher = sc.next();
+                    publisherManagerController.insertPublisher(memberDto, publisher);
+
+                    break;
+                case 0:
                     return;
                 default:
                     System.out.println("잘못 입력된 값입니다. 다시 입력해주세요!");

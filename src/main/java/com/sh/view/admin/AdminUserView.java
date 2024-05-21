@@ -1,15 +1,19 @@
-package com.sh.view;
+package com.sh.view.admin;
 
 import com.sh.controller.AdminUserContoller;
-import com.sh.inventory.view.InventoryView;
 import com.sh.model.entity.MemberDto;
+import com.sh.view.InventoryView;
+import com.sh.view.PublisherView;
 
 import java.util.Scanner;
 
+import static com.sh.WMSApplication.getScanner;
+
 public class AdminUserView {
-    Scanner sc = new Scanner(System.in);
+    Scanner sc = getScanner();
     InventoryView inventoryView = new InventoryView();
-    //    Publisher publisher = new publisherView(); //✅ 출판 관리 뷰 객체 생성
+    PublisherView publisher = new PublisherView(); //✅ 출판 관리 뷰 객체 생성
+
     AdminUserContoller adminUserContoller = new AdminUserContoller();
 
     public void choiceAdminMenu(MemberDto memberDto) {
@@ -35,7 +39,7 @@ public class AdminUserView {
                     inventoryView.inventoryMenu();
                     break;
                 case 3:
-//                    publisher.publisherMenu();
+                    //publisher.publisherMenu();
                     break;
                 case 4:
                     return;

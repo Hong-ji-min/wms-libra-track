@@ -4,12 +4,11 @@ import com.sh.model.dao.BookDAO;
 import com.sh.model.dao.GenreDAO;
 
 import com.sh.model.dto.bookDto.Book;
-import com.sh.view.bookView.bookResultView.DisplayResultView;
+import com.sh.view.result.DisplayResultView;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import static com.sh.common.MyBatisTemplate.getSqlSession;
 
@@ -48,8 +47,8 @@ public class BookService {
     public Book findBookByISBN(String isbn) {
         SqlSession sqlSession =getSqlSession();
         BookDAO bookDAO = sqlSession.getMapper(BookDAO.class);
-
         Book book = bookDAO.findBookByISBN(isbn);
+        sqlSession.close();
         return book;
     }
 
@@ -90,7 +89,7 @@ public class BookService {
         sqlSession = getSqlSession();
         bookDAO = sqlSession.getMapper(BookDAO.class);
         List<Book> bookList = bookDAO.findAll(id);
-        DisplayResultView.displayBookList(bookList);
+        sqlSession.close();
         return bookList;
     }
 

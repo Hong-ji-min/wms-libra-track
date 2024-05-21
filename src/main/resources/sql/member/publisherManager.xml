@@ -29,6 +29,14 @@
         where
             pm.member_id = #{memberId}
     </select>
+    <select id="findByPublisherManagerId" resultType="com.sh.model.entity.PublisherManagerDto">
+        select
+            *
+        from
+            publisher_manager
+        where
+            publisher_manager_id = #{publisherManagerId}
+    </select>
 
     <insert id="insertPublisherManager" useGeneratedKeys="true" keyProperty="publisherManagerId">
         insert into
@@ -38,6 +46,7 @@
             #{publisherId}
         )
     </insert>
+
     <update id="updatePublisherManagerInfo">
         update
             member

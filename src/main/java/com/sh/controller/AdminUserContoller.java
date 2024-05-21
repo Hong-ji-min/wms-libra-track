@@ -2,7 +2,7 @@ package com.sh.controller;
 
 import com.sh.model.entity.MemberDto;
 import com.sh.model.service.AdminUserService;
-import com.sh.view.MemberResultView;
+import com.sh.view.result.MemberResultView;
 
 public class AdminUserContoller {
     AdminUserService adminUserService = new AdminUserService();

@@ -1,10 +1,11 @@
 package com.sh.view;
 
 import com.sh.controller.InventoryController;
-//import com.sh.menu.model.dto.CategoryDto;
 import com.sh.model.dto.InventoryDto;
 
 import java.util.Scanner;
+
+import static com.sh.WMSApplication.getScanner;
 
 /**
  * <pre>
@@ -16,8 +17,7 @@ import java.util.Scanner;
  */
 public class InventoryView {
     private InventoryController inventoryController = new InventoryController();
-    private Scanner sc = new Scanner(System.in);
-
+    private Scanner sc = getScanner();
     public void inventoryMenu() {
         String menu = """
             ==============================================================================================
@@ -70,5 +70,27 @@ public class InventoryView {
         inventoryController.findAllInventory();
         System.out.printf("> %s할 창고코드 : ", type);
         return sc.nextInt();
+    }
+
+
+    public void inventoryManagerMenu() {
+        String menu = """
+            ==============================================================================================
+            1. 전체 창고 조회
+            2. 창고 코드로 창고 조회
+            0. 종료
+            ==============================================================================================
+            입력 : """;
+        while(true) {
+            System.out.print(menu);
+            String choice = sc.next();
+            switch (choice) {
+                case "1" : inventoryController.findAllInventory(); break;
+                case "2" : inventoryController.findInventoryByInventoryId(inputInventoryId("조회")); break;
+                case "0" : return;
+                default:
+                    System.out.println("잘못 입력하셨습니다.");
+            }
+        }
     }
 }

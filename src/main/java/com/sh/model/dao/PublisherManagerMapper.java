@@ -7,4 +7,8 @@ public interface PublisherManagerMapper {
     PublisherManagerDto findPublisherManagerInfo(MemberDto memberDto);
 
     int updatePublisherManagerInfo(MemberDto memberDto);
+
+    PublisherManagerDto findByPublisherManagerId(int publisherManagerId);
+
+    int insertPublisherManager(PublisherManagerDto publisherManagerDto);
 }

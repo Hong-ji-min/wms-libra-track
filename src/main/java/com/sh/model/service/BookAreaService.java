@@ -4,6 +4,8 @@ import com.sh.model.dto.AreaDto;
 import com.sh.exception.StockException;
 
 import com.sh.model.dao.BookAreaDao;
+import com.sh.model.dto.AreaInventoryDto;
+import com.sh.model.dto.OrderAreaDetailDto;
 import com.sh.model.entity.BookArea;
 import org.apache.ibatis.session.SqlSession;
 
@@ -81,5 +83,13 @@ public class BookAreaService {
         AreaDto area = bookAreaDao.findAreaByOrderId(orderId);
         sqlSession.close();
         return area;
+    }
+
+    public AreaInventoryDto findAreaInventoryByBookAreaId(int bookAreaId){
+        SqlSession sqlSession = getSqlSession();
+        BookAreaDao bookAreaDao = sqlSession.getMapper(BookAreaDao.class);
+        AreaInventoryDto areaInventoryDto = bookAreaDao.findAreaInventoryByBookAreaId(bookAreaId);
+        sqlSession.close();
+        return areaInventoryDto;
     }
 }

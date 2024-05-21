@@ -3,18 +3,23 @@ package com.sh.controller.book;
 
 import com.sh.common.error.ErrorCode;
 import com.sh.common.error.ErrorView;
+import com.sh.model.dto.AreaInventoryDto;
 import com.sh.model.dto.bookDto.Book;
+import com.sh.model.service.BookAreaService;
 import com.sh.model.service.bookService.BookService;
-import com.sh.view.bookView.BookMenuView;
-import com.sh.view.bookView.bookResultView.DisplayResultView;
+import com.sh.view.result.DisplayResultView;
 
-import java.util.Optional;
+import java.util.List;
 
 public class BookController {
     BookService bookService = new BookService();
 
-    public void findAll(int id){
-        bookService.findAll(id);
+    BookAreaService bookAreaService = new BookAreaService();
+
+    public List<Book> findAll(int id){
+        List<Book> bookList = bookService.findAll(id);
+        DisplayResultView.displayBookList(bookList);
+        return bookList;
     }
     public int getGenreId(String genreName) {
         return bookService.getGenreId(genreName);
@@ -24,6 +29,19 @@ public class BookController {
         int result = bookService.insertBook(book);
 
         DisplayResultView.displayResult("등록", result);
+    }
+
+    public Book findBookStockByISBN(String ISBN) {
+
+        try {
+            Book book = bookService.findBookByISBN(ISBN);
+            DisplayResultView.displayBookStock(book);
+            return book;
+        } catch (Exception e) {
+            e.printStackTrace();
+            ErrorView.displayError(ErrorCode.FAIL_SEARCH_ISBN);
+            return null;
+        }
     }
 
 
@@ -71,5 +89,15 @@ public class BookController {
     }
     public void findBookIdByPublisherIdAndISBN(int publisherId, String ISBN) {
         bookService.findBookIdByPublisherIdAndISBN(publisherId,ISBN);
+    }
+
+    public void findBookLocation(String isbn) {
+        Book book = bookService.findBookByISBN(isbn);
+        DisplayResultView.displayBookLocation(book);
+
+    }
+
+    public AreaInventoryDto findAreaInventoryBYBookAreaId(int bookAreaId) {
+        return bookAreaService.findAreaInventoryByBookAreaId(bookAreaId);
     }
 }
