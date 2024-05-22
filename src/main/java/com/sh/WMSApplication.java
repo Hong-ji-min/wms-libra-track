@@ -10,7 +10,6 @@ public class WMSApplication {
     public static boolean EX = false;
 
     private static Scanner scanner = new Scanner(System.in);
-
     public static Integer PUB_MANAGER_ID = 0;
     public static Integer PUB_ID = 0;
     public static Integer INVEN_MANAGER_ID  = 0;

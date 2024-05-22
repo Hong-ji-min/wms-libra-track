@@ -31,3 +31,8 @@ INSERT INTO `order` (quantity, book_id, in_warehousing_id) values (10, 1, 2);
 INSERT INTO `order` (quantity, book_id, in_warehousing_id) values (25, 2, 2);
 
 INSERT INTO `order` (quantity, book_id, in_warehousing_id) values (10, 1, 3);
+
+
+INSERT INTO member values (2, 'inven', 'inven', 'inven', 'INVENTORY', '12345678911', 'ddddd@gmail.com');
+
+INSERT INTO inventory_manager (entry_date, emp_number, inventory_id, member_id) values ('2023-06-01', '1234578911', 1, 2);

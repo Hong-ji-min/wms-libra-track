@@ -13,7 +13,7 @@
     <select id="findBookByISBN" resultMap="bookStockDto">
         select *
         from book
-        join book_area
+        left join book_area
         on book.book_id = book_area.book_id
         where
             ISBN = #{ISBN}

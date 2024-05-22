@@ -21,7 +21,7 @@ public class InventoryManagerView {
 
     public void inventoryManagerMainView(MemberDto memberDto) {
         String choicePublisherMenu = """
-                📖📖📖출판사 매니저 메뉴📖📖📖
+                📖📖📖창고 매니저 메뉴📖📖📖
                 =============================
                 1. 창고 관리
                 2. 입고 관리
